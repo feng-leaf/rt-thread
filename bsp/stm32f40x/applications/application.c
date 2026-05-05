@@ -12,7 +12,7 @@
  * 2009-01-05     Bernard      the first version
  * 2014-04-27     Bernard      make code cleanup. 
  */
-
+#include "led.h"
 #include <board.h>
 #include <rtthread.h>
 
@@ -26,6 +26,23 @@
 #ifdef RT_USING_GDB
 #include <gdb_stub.h>
 #endif
+
+
+void rt_led_thread_entry(void* parameter)
+{
+    led_init();
+    while(1)
+    {
+        rt_kprintf("led open\n");
+        GPIO_ResetBits(GPIOF,GPIO_Pin_11);
+        GPIO_ResetBits(GPIOF,GPIO_Pin_12);
+        rt_thread_delay(100);
+        rt_kprintf("led close\n");
+        GPIO_SetBits(GPIOF,GPIO_Pin_11);
+        GPIO_SetBits(GPIOF,GPIO_Pin_12);
+        rt_thread_delay(100);
+    }
+}
 
 void rt_init_thread_entry(void* parameter)
 {
@@ -50,6 +67,19 @@ void rt_init_thread_entry(void* parameter)
         rt_kprintf("TCP/IP initialized!\n");
     }
 #endif
+
+//-----------------------------
+    rt_thread_t tid;
+
+    tid = rt_thread_create("rt led thread",
+        rt_led_thread_entry, RT_NULL,
+        2048, RT_THREAD_PRIORITY_MAX/3, 20);
+
+    if (tid != RT_NULL)
+        rt_thread_startup(tid);
+
+//no while loop, rt_init_thread_entry can exit.
+//-----------------------------
 }
 
 int rt_application_init()
