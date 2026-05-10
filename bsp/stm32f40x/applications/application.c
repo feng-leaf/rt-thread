@@ -34,12 +34,12 @@ void rt_led_thread_entry(void* parameter)
     while(1)
     {
         rt_kprintf("led open\n");
-        GPIO_ResetBits(GPIOF,GPIO_Pin_11);
-        GPIO_ResetBits(GPIOF,GPIO_Pin_12);
+        GPIO_ResetBits(GPIOF,GPIO_Pin_9);
+        GPIO_ResetBits(GPIOF,GPIO_Pin_10);
         rt_thread_delay(100);
         rt_kprintf("led close\n");
-        GPIO_SetBits(GPIOF,GPIO_Pin_11);
-        GPIO_SetBits(GPIOF,GPIO_Pin_12);
+        GPIO_SetBits(GPIOF,GPIO_Pin_9);
+        GPIO_SetBits(GPIOF,GPIO_Pin_10);
         rt_thread_delay(100);
     }
 }

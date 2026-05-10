@@ -36,15 +36,15 @@ void led_init(void)
     
     RCC_APB2PeriphClockCmd(RCC_AHB1Periph_GPIOF, ENABLE);	 //使能PF端口时钟
 	
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;				 //LED0-->PF.11 端口配置
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;				 //LED0-->PF.11 端口配置
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT; 		     //推挽输出
     GPIO_InitStructure.GPIO_OType = GPIO_OType_PP; 
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;		 //IO口速度为50MHz
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
     GPIO_Init(GPIOF, &GPIO_InitStructure);					 //根据设定参数初始化
-    GPIO_SetBits(GPIOF,GPIO_Pin_11);						 //PF.11 输出高
+    GPIO_SetBits(GPIOF,GPIO_Pin_9);						 //PF.11 输出高
 
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;	    		 //LED1-->PF.12 端口配置, 推挽输出
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10;	    		 //LED1-->PF.12 端口配置, 推挽输出
     GPIO_Init(GPIOF, &GPIO_InitStructure);	  				 //推挽输出 ，IO口速度为50MHz
-    GPIO_SetBits(GPIOF,GPIO_Pin_12); 						 //PF.12 输出高 
+    GPIO_SetBits(GPIOF,GPIO_Pin_10); 						 //PF.12 输出高 
 }
